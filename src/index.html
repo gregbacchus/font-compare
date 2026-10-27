@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ef">
+  <meta name="description" content="Compare two typefaces character by character with color overlays.">
+  <title>Font Overlay Lab</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">F<span>F</span></span><span>FONT<span class="brand-light">/</span>OVERLAY</span><span class="brand-tag">LAB</span></div>
+      <div class="topbar-right"><span class="live-dot"></span> CHARACTER COMPARISON TOOL <span class="topbar-version">/ 01</span></div>
+    </header>
+
+    <div class="app-body">
+      <aside class="sidebar" aria-label="Comparison controls">
+        <div class="sidebar-intro"><div class="eyebrow">THE SETUP</div><h1>See every<br><em>difference.</em></h1><p>Two typefaces, one baseline. Inspect the details that make each letter its own.</p></div>
+
+        <section class="control-section" aria-labelledby="fonts-heading">
+          <div class="section-heading"><span class="section-number">01</span><h2 id="fonts-heading">Typefaces</h2></div>
+          <div class="font-panel" data-slot="a">
+            <div class="font-panel-head"><span class="font-letter">A</span><div><span class="field-kicker">FIRST FONT</span><strong id="font-name-a">Inter</strong></div><span class="font-indicator" id="indicator-a"></span></div>
+            <div class="source-tabs" role="group" aria-label="First font source"><button class="source-tab active" type="button" data-source="google" data-slot="a">Google Fonts</button><button class="source-tab" type="button" data-source="computer" data-slot="a">My computer</button></div>
+            <div class="source-panel google-panel" id="google-panel-a"><label for="google-a">Search a Google font</label><div class="search-wrap"><input id="google-a" class="google-input" type="text" value="Inter" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestions-a"><span class="search-icon" aria-hidden="true">⌕</span><div class="suggestions" id="suggestions-a" role="listbox"></div></div></div>
+            <div class="source-panel computer-panel" id="computer-panel-a" hidden><label for="local-a">Choose a computer font</label><select id="local-a" class="local-select"><option value="">Choose a font…</option></select><div class="computer-actions"><button type="button" class="small-action" data-action="browse" data-slot="a">Browse installed</button><button type="button" class="small-action" data-action="upload" data-slot="a">Upload font file</button></div></div>
+          </div>
+          <div class="font-panel" data-slot="b">
+            <div class="font-panel-head"><span class="font-letter">B</span><div><span class="field-kicker">SECOND FONT</span><strong id="font-name-b">Roboto</strong></div><span class="font-indicator" id="indicator-b"></span></div>
+            <div class="source-tabs" role="group" aria-label="Second font source"><button class="source-tab active" type="button" data-source="google" data-slot="b">Google Fonts</button><button class="source-tab" type="button" data-source="computer" data-slot="b">My computer</button></div>
+            <div class="source-panel google-panel" id="google-panel-b"><label for="google-b">Search a Google font</label><div class="search-wrap"><input id="google-b" class="google-input" type="text" value="Roboto" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestions-b"><span class="search-icon" aria-hidden="true">⌕</span><div class="suggestions" id="suggestions-b" role="listbox"></div></div></div>
+            <div class="source-panel computer-panel" id="computer-panel-b" hidden><label for="local-b">Choose a computer font</label><select id="local-b" class="local-select"><option value="">Choose a font…</option></select><div class="computer-actions"><button type="button" class="small-action" data-action="browse" data-slot="b">Browse installed</button><button type="button" class="small-action" data-action="upload" data-slot="b">Upload font file</button></div></div>
+          </div>
+          <input id="font-file" type="file" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" multiple hidden>
+          <p class="hint" id="font-hint">Installed font access is available in supported browsers. Font files stay in this browser session.</p>
+          <p class="font-feedback" id="status" role="status" aria-live="polite" hidden></p>
+        </section>
+
+        <section class="control-section" aria-labelledby="characters-heading">
+          <div class="section-heading"><span class="section-number">02</span><h2 id="characters-heading">Characters</h2></div>
+          <div class="set-options" role="radiogroup" aria-label="Character set"><label class="set-option selected"><input type="radio" name="set" value="standard" checked><span>Standard</span><small>Basic Latin · 95</small></label><label class="set-option"><input type="radio" name="set" value="extended"><span>Extended</span><small>Latin through Extended-A · 319</small></label><label class="set-option"><input type="radio" name="set" value="custom"><span>Custom</span><small>Use your own text</small></label></div>
+          <div class="custom-wrap" id="custom-wrap" hidden><label for="custom-chars">Characters to compare</label><textarea id="custom-chars" rows="3" placeholder="Type or paste characters here…">AaBbCc123!?&amp;@</textarea><small>Repeated characters are shown once, in the order entered.</small></div>
+        </section>
+
+        <section class="control-section color-section" aria-labelledby="color-heading">
+          <div class="section-heading"><span class="section-number">03</span><h2 id="color-heading">Overlay colors</h2></div>
+          <div class="color-row"><span class="color-label">FONT A</span><div class="swatches" id="swatches-a" aria-label="First font color"></div></div>
+          <div class="color-row"><span class="color-label">FONT B</span><div class="swatches" id="swatches-b" aria-label="Second font color"></div></div>
+          <div class="blend-heading"><span>BLEND MODE</span><span class="blend-heading-mark" aria-hidden="true">◑</span></div>
+          <div class="blend-modes" id="blend-modes" role="group" aria-label="Blend mode"></div>
+          <p class="blend-description" id="blend-description"></p>
+        </section>
+        <div class="sidebar-footer">MADE FOR THE DETAILS <span>↗</span></div>
+      </aside>
+
+      <main class="workspace">
+        <div class="workspace-head"><div><div class="eyebrow">COMPARE THE DETAILS</div><h2>Character grid<span class="heading-period">.</span></h2></div><div class="workspace-meta"><span id="count-label">95 CHARACTERS</span><span class="meta-divider"></span><span>250 × 250 PX</span></div></div>
+        <div class="grid-toolbar"><div class="legend"><span class="legend-item"><i id="legend-a"></i><span id="legend-name-a">Inter</span></span><span class="legend-cross">×</span><span class="legend-item"><i id="legend-b"></i><span id="legend-name-b">Roboto</span></span></div><span class="grid-instruction">SELECT A CHARACTER TO INSPECT <span>↗</span></span></div>
+        <div class="grid-scroll" id="grid-scroll"><div class="glyph-grid" id="glyph-grid" aria-live="polite"></div></div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title"><div class="detail-top"><div><div class="eyebrow">CLOSE-UP / CHARACTER <span id="detail-index"></span></div><h2 id="detail-title">A</h2></div><button type="button" class="close-button" id="close-detail" aria-label="Close character detail">×</button></div><div class="detail-stage"><canvas id="detail-canvas" aria-label="Enlarged overlaid character"></canvas></div><div class="detail-bottom"><div class="detail-fonts"><span><i id="detail-dot-a"></i><strong id="detail-font-a">Inter</strong></span><span><i id="detail-dot-b"></i><strong id="detail-font-b">Roboto</strong></span></div><div class="detail-nav"><button type="button" id="prev-char" aria-label="Previous character">←</button><button type="button" id="next-char" aria-label="Next character">→</button></div></div></dialog>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
